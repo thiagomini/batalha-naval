@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev nodemon index.js"
+    "dev": "cross-env NODE_ENV=dev nodemon index.js",
+    "migrate-local": "cross-env NODE_ENV=local sequelize db:migrate",
+    "migrate-local-undo": "cross-env NODE_ENV=local sequelize db:migrate:undo:all"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -19,6 +21,7 @@
     "helmet": "^4.1.1",
     "node-colorify": "^2.0.1",
     "nodemon": "^2.0.6",
+    "pg": "^8.5.1",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0"
   },

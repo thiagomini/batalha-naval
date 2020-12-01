@@ -1,48 +1,53 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('matches', {
+    await queryInterface.createTable('ships', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idJogador1: {
+      idUsuario: {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
-          key:'id'
+          key: 'id'
         },
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      idJogador2: {
+      idPartida: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'users',
-          key:'id'
+          model: 'matches',
+          key: 'id'
         },
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      turnoDoJogador: {
+      idTabuleiro: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'users',
-          key:'id'
+          model: 'boards',
+          key: 'id'
         },
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      vencedor: {
+      idTipoNavio: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'users',
-          key:'id'
+          model: 'ship_types',
+          key: 'id'
         },
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onUpdate: 'CASCADE'
+      },
+      vivo: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -54,10 +59,10 @@ module.exports = {
       },
       deletedAt: {
         type: Sequelize.DATE
-      }
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('matches');
+    await queryInterface.dropTable('ships');
   }
 };

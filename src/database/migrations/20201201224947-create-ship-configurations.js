@@ -1,48 +1,33 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('matches', {
+    await queryInterface.createTable('ship_configurations', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idJogador1: {
+      idConfiguracaoPartida: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'users',
-          key:'id'
+          model: 'match_configurations',
+          key: 'id'
         },
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      idJogador2: {
+      idTipoNavio: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'users',
-          key:'id'
+          model: 'ship_types',
+          key: 'id'
         },
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      turnoDoJogador: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'users',
-          key:'id'
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-      },
-      vencedor: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'users',
-          key:'id'
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+      quantidade: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -58,6 +43,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('matches');
+    await queryInterface.dropTable('ship_configurations');
   }
 };

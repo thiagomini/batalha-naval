@@ -1,21 +1,31 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('ship_positions', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nome: {
-        type: Sequelize.STRING
+      idNavio: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'ships',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      email: {
-        type: Sequelize.STRING
+      posicaoX: {
+        type: Sequelize.INTEGER
       },
-      senha: {
-        type: Sequelize.STRING
+      posicaoY: {
+        type: Sequelize.INTEGER
+      },
+      atingido: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +41,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('ship_positions');
   }
 };

@@ -1,5 +1,18 @@
 require('../lib/dotenv');
 
+function logger (queryString, queryObject) {
+  if (queryObject.bind) {
+    queryObject.bind.forEach((element, index) => {
+      if (typeof element === 'string' || (element !== null && typeof element === 'object')) {
+        element = `'${element}'`;
+      }
+
+      queryString = queryString.replace(`$${index + 1}`, ` ${element}`);
+    });
+  }
+  console.log(queryString);
+}
+
 module.exports = {
   dev: {
     use_env_variable: 'DATABASE_URL',
@@ -17,9 +30,6 @@ module.exports = {
       timestamp: true,
       underscored: true,
       paranoid: true,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
-      deletedAt: 'deleted_at'
     },
     seederStorage: 'sequelize'
   },
@@ -40,9 +50,6 @@ module.exports = {
       timestamp: true,
       underscored: true,
       paranoid: true,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
-      deletedAt: 'deleted_at'
     },
     seederStorage: 'sequelize'
   },
@@ -58,9 +65,6 @@ module.exports = {
       timestamp: true,
       underscored: true,
       paranoid: false,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
-      deletedAt: 'deleted_at'
     },
     ssl: false,
     seederStorage: 'sequelize'

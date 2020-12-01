@@ -1,48 +1,36 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('matches', {
+    await queryInterface.createTable('boards', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idJogador1: {
+      idUsuario: {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
-          key:'id'
+          key: 'id'
         },
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      idJogador2: {
+      idPartida: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'users',
-          key:'id'
+          model: 'matches',
+          key: 'id'
         },
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      turnoDoJogador: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'users',
-          key:'id'
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+      tamanho: {
+        type: Sequelize.INTEGER
       },
-      vencedor: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'users',
-          key:'id'
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+      tirosRestantes: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -54,10 +42,10 @@ module.exports = {
       },
       deletedAt: {
         type: Sequelize.DATE
-      }
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('matches');
+    await queryInterface.dropTable('boards');
   }
 };
