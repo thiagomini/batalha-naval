@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    es6: false,
+    es6: true,
     node: true,
     jest: true
   },
@@ -12,7 +12,7 @@ module.exports = {
     SharedArrayBuffer: 'readonly'
   },
   parserOptions: {
-    ecmaVersion: 10,
+    ecmaVersion: 11,
     sourceType: 'module'
   },
   rules: {
